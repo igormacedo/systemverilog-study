@@ -1,4 +1,8 @@
+
+DEVICE= $(wildcard source/*.sv)
+TESTBENCH= $(wildcard tests/*.sv)
 CC=iverilog
 
 all:
-	CC source/*.sv tests/*tb.sv -o build/*
+	mkdir -p build
+	$(CC) $(DEVICE) $(TESTBENCH) -o build/dut
