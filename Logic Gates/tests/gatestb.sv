@@ -7,6 +7,8 @@ wire out_xor_sgn;
 wire out_nand_sgn;
 
 initial begin
+    $dumpfile("build/wave.vcd");
+	$dumpvars(0, gate_tb);
     $display ("Port Values");
     $monitor ("A=%b, B=%b, Out_and=%b, Out_or=%b, Out_xor=%b, Out_nand=%b", input_a, input_b, out_and_sgn, out_or_sgn, out_xor_sgn, out_nand_sgn);
     #0 input_a = 0;

@@ -9,3 +9,6 @@ all:
 
 run:
 	./build/dut
+
+wave:
+	gtkwave ./build/wave.vcd
