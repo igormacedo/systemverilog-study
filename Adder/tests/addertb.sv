@@ -4,6 +4,11 @@ reg[1:0] inp_ha, inp_a;
 reg c_in;
 wire sum_ha, sum_a, carry_ha, carry_a;
 
+reg[3:0] inpA_4bitfa, inpB_4bitfa;
+wire[3:0] sum_4bitfa;
+wire carry_out_4bitfa;
+wire[4:0] total_sum_debug;
+
 halfadder dut1 (
     .a (inp_ha[0]),
     .b (inp_ha[1]),
@@ -19,7 +24,18 @@ fulladder dut2 (
     .c_out (carry_a)
 );
 
+fulladder4bit dut3 (
+    .a (inpA_4bitfa),
+    .b (inpB_4bitfa),
+    .c_in (c_in),
+    .sum (sum_4bitfa),
+    .c_out (carry_out_4bitfa)
+);
+
 integer i;
+integer f;
+
+assign total_sum_debug = {carry_out_4bitfa, sum_4bitfa};
 
 initial
 begin
@@ -43,6 +59,21 @@ begin
         inp_a = i; 
         c_in = 0; #1;
         c_in = 1; #1;
+    end
+
+    $display("\n\n4bit Full-adder test");
+    $display("A\tB\tc_in\tSum\tc_out");
+    $monitor("%d\t%d\t%b\t%d", inpA_4bitfa, inpB_4bitfa, c_in, total_sum_debug);
+
+    for (i = 0; i <= 15; i = i + 1)
+    begin
+        for (f = 0; f <= 15; f = f + 1)
+        begin
+            inpA_4bitfa = i;
+            inpB_4bitfa = f; 
+            c_in = 0; #1;
+            c_in = 1; #1;
+        end
     end
 
     $finish;
