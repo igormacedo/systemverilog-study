@@ -1,2 +1,10 @@
 */build/
 
+#modelsim folders
+*/work/
+
+#modelsim files
+*.bak
+*.mti
+*.mpf
+*.wlf
