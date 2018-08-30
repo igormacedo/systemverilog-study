@@ -4,7 +4,7 @@ module counter4bit(
     input logic enable,
     output logic[3:0] out);
 
-var logic[3:0] counter = 0;
+var logic[3:0] counter;
 
 always_ff @(posedge clk) begin
     if (enable) begin
