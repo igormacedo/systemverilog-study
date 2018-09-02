@@ -30,10 +30,28 @@ class counter_scoreboard extends uvm_scoreboard;
     endfunction
 
     task run();
+      	bit first_enable = 0;
+      	integer count = 0;
+        $display("======================= COMPARISON =====================\n");
+        `uvm_info("PACKET_COMP","en    in    ex    ot\n", UVM_LOW)
+      
         forever begin
             output_fifo.get(c_tx_output);
             input_fifo.get(c_tx_input);
-            $display("data coming to scoreboard, change to see and compare");
+            
+            priority if(c_tx_input.enable == 1'b1) begin
+                count = c_tx_input.value_in;
+                first_enable = 1;
+            end else if (count == 15 || first_enable == 0) begin
+                count = 0;
+            end else begin
+                count = count + 1;
+            end
+
+            `uvm_info("PACKET_COMP", $sformatf("%b    %d     %d    %d\n",c_tx_input.enable, c_tx_input.value_in, count ,c_tx_output.value_out), UVM_LOW)
+            if (count != c_tx_output.value_out) begin
+                `uvm_error("MISMATCH", "Current output didn't match expectations")
+            end
         end
     endtask
 endclass

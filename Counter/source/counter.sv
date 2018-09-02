@@ -4,16 +4,12 @@ module counter4bit(
     input logic enable,
     output logic[3:0] out);
 
-var logic[3:0] counter;
-
-always_ff @(posedge clk) begin
-    if (enable) begin
-        counter <= value_in;
-    end else begin
-        counter <= counter + 1;
+    always_ff @(posedge clk) begin
+        if (enable) begin
+            out = value_in;
+        end else begin
+            out = out + 1;
+        end
     end
-end
-
-assign out = counter;
 
 endmodule

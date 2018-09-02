@@ -1,1 +1,1 @@
-typedef uvm_sequencer#(conter_transaction) counter_sequencer;
+typedef uvm_sequencer#(counter_transaction) counter_sequencer;

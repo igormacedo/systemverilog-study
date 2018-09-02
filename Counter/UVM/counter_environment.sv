@@ -1,4 +1,4 @@
-class counter_environment extends uvm_env
+class counter_environment extends uvm_env;
     `uvm_component_utils(counter_environment)
 
     counter_agent c_agent;
@@ -11,7 +11,7 @@ class counter_environment extends uvm_env
     function void build_phase(uvm_phase phase);
         super.build_phase(phase);
         c_agent = counter_agent::type_id::create(.name("c_agent"),.parent(this));
-        counter_scoreboard = counter_scoreboard::type_id::create(.name("c_scoreboard"),.parent(this));
+        c_scoreboard = counter_scoreboard::type_id::create(.name("c_scoreboard"),.parent(this));
     endfunction
 
     function void connect_phase(uvm_phase phase);

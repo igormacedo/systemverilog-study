@@ -1,5 +1,5 @@
 class counter_agent extends uvm_agent;
-    `uvm_component_utisl(counter_agent);
+    `uvm_component_utils(counter_agent)
 
     //Analysis port to connect monitor to scoreboard
     uvm_analysis_port#(counter_transaction) agent_ap_output;
@@ -29,7 +29,7 @@ class counter_agent extends uvm_agent;
     function void connect_phase(uvm_phase phase);
         super.connect_phase(phase);
 
-        c_driver.seq_item_port.connect(c_sequencer.seq_item_port);
+        c_driver.seq_item_port.connect(c_sequencer.seq_item_export);
         c_mon_output.mon_ap_output.connect(agent_ap_output);
         c_mon_input.mon_ap_input.connect(agent_ap_input);
     endfunction
