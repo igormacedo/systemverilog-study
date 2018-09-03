@@ -1,0 +1,1 @@
+typedef uvm_sequencer#(alu_transaction) alu_sequencer;
